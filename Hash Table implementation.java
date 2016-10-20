@@ -79,5 +79,14 @@ class HashTable{
     }  
   }
 
+  private int myHash(String x)
+  {
+    int hashVal = x.hashCode( );
+    hashVal %= TABLE_SIZE;
+    if (hashVal < 0)
+        hashVal += TABLE_SIZE;
+    return hashVal;
+  }
+
 }
 
