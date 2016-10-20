@@ -58,5 +58,26 @@ class HashTable{
     size++;
   }
 
+  public void remove(String key){
+    int hashKey = myHash(key) % numOfBuckets;
+    LinkedHashEntry prev = null;
+    LinkedHashEntry entry = table[hashKey];
+    if(table[hashKey] != null){
+      while(entry.next!=null && entry.key!=key){
+        prev = entry;
+        entry = entry.next;
+      }
+      if(entry.key == key){
+        if(prev == null){
+          table[hashKey] = entry.next;
+        }
+        else{
+          prev.next = entry.next;
+        }
+        size--;
+      }      
+    }  
+  }
+
 }
 
