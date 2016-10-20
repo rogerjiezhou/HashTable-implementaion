@@ -25,4 +25,21 @@ class HashTable{
     }
   }
 
+  public int get(String key){
+    int hashKey = myHash(key) % numOfBuckets;
+    if(table[hashKey] == null)
+      return -1;
+    else{
+      LinkedHashEntry entry = table[hashKey];
+      while(entry != null && entry.key != key){
+        entry = entry.next;
+      }
+      if(entry == null)
+        return -1;
+      else
+        return entry.value;
+    }
+  }
+
 }
+
