@@ -15,7 +15,7 @@ class HashTable{
   private int size;
   private LinkedHashEntry[] table;
 
-  HashTable(int buckets){
+  public HashTable(int buckets){
     numOfBuckets = buckets;
     size = 0;
     table = new LinkedHashEntry[numOfBuckets];
@@ -39,6 +39,23 @@ class HashTable{
       else
         return entry.value;
     }
+  }
+
+  public void insert(String key, int value){
+    int hashKey = myHash(key) % numOfBuckets;
+    if(table[hashKey] == null)
+      table[hashKey] = new LinkedHashEntry(key, value);
+    else{
+      LinkedHashEntry entry = table[hashKey];
+      while(entry.next!=null && entry.key!=key){
+        entry = entry.next;
+      }
+      if(entry.key == key)
+        entry.value = value;
+      else
+        entry.next = new LinkedHashEntry(key, value);
+    }
+    size++;
   }
 
 }
